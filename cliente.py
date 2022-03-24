@@ -12,10 +12,19 @@ import socket
 # Criar um socket UDP para IPv4
 socketCliente = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-# Os dados devem ser codificados em vetores de bytes
-dados = str.encode("Oi do cliente")
 # Endereço e porta do servidor
 endereco = ('localhost', 5000)
 
-# Enviar uma mensagem
-socketCliente.sendto(dados, endereco)
+while True:
+    texto = input(">")
+
+    # Os dados devem ser codificados em vetores de bytes
+    dados = str.encode(texto)
+    
+    # Enviar uma mensagem
+    socketCliente.sendto(dados, endereco)
+    
+    if texto == "sair":
+        break
+    
+socketCliente.close()
