@@ -1,5 +1,5 @@
 # Importando o módulo que possibilita abrir conexões
-import socket
+import socket, json
 
 # Objeto que será o socket UDP para IPv4 do servidor
 socketServidor = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -16,7 +16,14 @@ while True:
     # O objeto é uma tupla (conteúdo, (IP, porta))
     print("Recebido", mensagem[0], "de", mensagem[1])
     
-    if mensagem[0] == b"sair":
-        break
+    # Deserialização do formato JSON para objeto Python
+    obj = json.loads(mensagem[0])
     
-socketServidor.close()
+    print(obj)
+    
+    print(obj['ra'], "do aluno", obj['nome'])
+    
+    obj['nota'] = obj['nota'] + 1
+    
+    print("Nota após assistir o congresso:", obj['nota'])
+    
