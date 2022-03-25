@@ -6,16 +6,18 @@ Created on Thu Mar 24 19:38:51 2022
 """
 
 #Importar o módulo socket
-
 import socket, json
+from coordenada import Coordenada
 
 # Criar um socket UDP para IPv4
 socketCliente = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-objetoPython = {'nome': 'Mauricio', 'nota': 7.2, 'ra': 123}
+objetoPython = Coordenada(20,10) #{'nome': 'Mauricio', 'nota': 7.2, 'ra': 123}
 
 #Serializar o objeto no formato json
-dadoJson = json.dumps(objetoPython)
+dadoJson = json.dumps(vars(objetoPython))
+
+print(objetoPython.x, " ", objetoPython.y)
 
 print('Após serialização: ', dadoJson)
 
